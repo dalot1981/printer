@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورقة عمل تفاعلية | استخدام الطابعة</title>
+    <style>
+        body {
+            font-family: 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f9f6;
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            border-top: 6px solid #27ae60;
+        }
+        h1 {
+            text-align: center;
+            color: #27ae60;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        .card {
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+        }
+        .card-1 { border-color: #8e44ad; background-color: #fbf8fc; }
+        .card-2 { border-color: #16a085; background-color: #f4fbf9; }
+        .card-3 { border-color: #d35400; background-color: #fcf8f4; }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-1 .card-title { color: #8e44ad; }
+        .card-2 .card-title { color: #16a085; }
+        .card-3 .card-title { color: #d35400; }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .option-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ccc;
+            background: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .option-btn.selected {
+            background-color: #eaf2f8;
+            border-color: #3498db;
+            color: #2980b9;
+        }
+        .feedback {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct { color: #27ae60; }
+        .feedback.incorrect { color: #c0392b; }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            height: 60px;
+        }
+        .check-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        .check-btn:hover { background-color: #219653; }
+        
+        .submit-all {
+            display: block;
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submit-all:hover { background-color: #2471a3; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ورقة عمل تفاعلية | استخدام الطابعة</h1>
+    <div class="subtitle">مدرسة الرشاد النموذجية للبنين</div>
+
+    <!-- حقل الاسم الاختياري -->
+    <div class="form-group">
+        <label for="studentName">الاسم (اختياري):</label>
+        <input type="text" id="studentName" placeholder="أدخل اسمك إذا رغبت...">
+    </div>
+
+    <!-- المجموعة الأولى: أكتشف -->
+    <div class="card card-1">
+        <div class="card-title">المجموعة الأولى | أكتشف: ضع دائرة حول ما يمكن طباعته</div>
+        <p>اختر العنصر الصحيح الذي يمكن للطابعة طباعته:</p>
+        <div class="options">
+            <button type="button" class="option-btn" onclick="selectOption(this, 'q1', 'wrong')">صوت</button>
+            <button type="button" class="option-btn" onclick="selectOption(this, 'q1', 'correct')">صورة</button>
+        </div>
+        <div id="fb-q1" class="feedback"></div>
+    </div>
+
+    <!-- المجموعة الثانية: أفكر -->
+    <div class="card card-2">
+        <div class="card-title">المجموعة الثانية | أفكر: أكمل بالكلمة المناسبة</div>
+        <p>قبل الطباعة، أوصل الحاسوب بـ ....................</p>
+        <div class="options">
+            <button type="button" class="option-btn" onclick="selectOption(this, 'q2', 'correct')">الطابعة</button>
+            <button type="button" class="option-btn" onclick="selectOption(this, 'q2', 'wrong')">الفأرة</button>
+        </div>
+        <div id="fb-q2" class="feedback"></div>
+    </div>
+
+    <!-- المجموعة الثالثة: أتحدّى -->
+    <div class="card card-3">
+        <div class="card-title">المجموعة الثالثة | أتحدّى</div>
+        <p>الحاسوب متصل بالطابعة، لكنها مطفأة. ماذا تفعل؟</p>
+        <textarea id="q3Text" placeholder="اكتب إجابتك هنا..."></textarea>
+        <button type="button" class="check-btn" onclick="checkChallenge()">تحقق من الإجابة</button>
+        <div id="fb-q3" class="feedback"></div>
+    </div>
+
+    <button type="button" class="submit-all" onclick="finishActivity()">إنهاء وإرسال الإجابات</button>
+</div>
+
+<script>
+    const answers = { q1: '', q2: '' };
+
+    function selectOption(button, questionId, status) {
+        // إزالة التحديد عن الأزرار الأخرى في نفس المجموعة
+        const parent = button.parentElement;
+        parent.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+        
+        // تحديد الزر الحالي
+        button.classList.add('selected');
+        answers[questionId] = status;
+
+        // تقديم تغذية راجعة فورية بصرية
+        const fb = document.getElementById('fb-' + questionId);
+        fb.style.display = 'block';
+        if(status === 'correct') {
+            fb.className = 'feedback correct';
+            fb.innerHTML = '✨ أحسنت! إجابة صحيحة وموفقة.';
+        } else {
+            fb.className = 'feedback incorrect';
+            fb.innerHTML = '❌ إجابة خاطئة، حاول مرة أخرى!';
+        }
+    }
+
+    function checkChallenge() {
+        const text = document.getElementById('q3Text').value.trim();
+        const fb = document.getElementById('fb-q3');
+        fb.style.display = 'block';
+        
+        if(text.length > 3) {
+            fb.className = 'feedback correct';
+            fb.innerHTML = '🌟 فكرة رائعة! ممتاز، يجب تشغيل زر الطاقة الخاص بالطابعة أولاً.';
+        } else {
+            fb.className = 'feedback incorrect';
+            fb.innerHTML = '⚠️ الرجاء كتابة إجابة أو فكرة صحيحة (مثل: تشغيل الطابعة).';
+        }
+    }
+
+    function finishActivity() {
+        const nameInput = document.getElementById('studentName').value.trim();
+        const displayName = nameInput !== "" ? nameInput : "البطل";
+        alert(`شكراً لك يا ${displayName}! تم تسجيل إجاباتك بنجاح ونفتخر بمشاركتك الرائعة.`);
+    }
+</script>
+
+</body>
+</html>
